@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CommentsController;
+use App\Models\Comment;
 
 
 Route::get('/dashboard', function () {
@@ -20,7 +21,8 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::delete('/posts/{post}', 'delete')->name('delete');
     Route::get('/posts/{post}/edit', 'edit')->name('edit');
 });
-
+Route::get('/comments', [PostController::class, 'index'])->name('comments.store');
+Route::post('/comments', [CommentsController::class, 'store'])->name('comments.store');
 Route::get('/categories/{category}', [CategoryController::class,'index'])->middleware("auth");
 
 Route::middleware('auth')->group(function () {
@@ -30,3 +32,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
