@@ -26,13 +26,15 @@
             @csrf
             <div class="body">
                 <h2>Body</h2>
-                <textarea name="post[comment]" placeholder="コメントする"></textarea>
+                <textarea name="comment[comment]" placeholder="コメントする"></textarea>
             </div>
             <input type="submit" value="store"/>
         </form>
    　　  </div>
+   　　 <button onclick="like({{$post->id}})">いいね</button>
         <div class="footer">
             <a href="/">戻る</a>
         </div>
+    </body>
     </x-app-layout>
 </html>

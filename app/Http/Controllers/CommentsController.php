@@ -8,12 +8,18 @@ use App\Models\Comment;
 
 class CommentsController extends Controller
 {
-    public function store(Request $request, Post $post,Comment $comment)
+    public function index(Comment $comment)
     {
-        $input = $request['post'];
+        return view('posts.index')->with(['comments' => $comment->get()]);
+    }
+    
+    public function store(Request $request,Comment $comment)
+    {
+        $input = $request['comment'];
+    
         $input += ['post_id' => 1];
         $input += ['user_id' => 1];
         $comment->fill($input)->save();
-        return redirect('/comments/' . $post->id);
+        return redirect('/');
     }
 }

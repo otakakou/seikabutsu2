@@ -12,8 +12,13 @@ class Comment extends Model
         'user_id',
     ];
 
-    public function post()
+    //public function post()
+    //{
+       // return $this->belongsTo('App\Post');
+    //}
+    
+    public function post()   
     {
-        return $this->belongsTo('App\Post');
+        return $this->belongsTo(Post::class);  
     }
 }

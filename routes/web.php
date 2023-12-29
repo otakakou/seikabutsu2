@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentsController;
 use App\Models\Comment;
 
-
+Route::post('/like/{postId}',[LikeController::class,'store']);
+Route::post('/unlike/{postId}',[LikeController::class,'destroy']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -21,7 +22,8 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::delete('/posts/{post}', 'delete')->name('delete');
     Route::get('/posts/{post}/edit', 'edit')->name('edit');
 });
-Route::get('/comments', [PostController::class, 'index'])->name('comments.store');
+
+//Route::get('/posts/{post}', [CommentsController::class, 'index'])->name('comments');
 Route::post('/comments', [CommentsController::class, 'store'])->name('comments.store');
 Route::get('/categories/{category}', [CategoryController::class,'index'])->middleware("auth");
 
