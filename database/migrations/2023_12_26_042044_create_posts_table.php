@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('title', 50);
             $table->string('body', 200);
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('comment_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

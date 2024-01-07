@@ -6,9 +6,11 @@ use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentsController;
 use App\Models\Comment;
+use App\Http\Controllers\LikeController;
 
-Route::post('/like/{postId}',[LikeController::class,'store']);
-Route::post('/unlike/{postId}',[LikeController::class,'destroy']);
+Route::get('/community/like/{post}', [LikeController::class, 'like'])->name('like');
+Route::get('/community/unlike/{post}', [LikeController::class, 'unlike'])->name('unlike');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

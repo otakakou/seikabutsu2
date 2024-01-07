@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Like;
 
 class PostController extends Controller
 {
@@ -13,10 +15,13 @@ class PostController extends Controller
         return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
     }
 
-    public function show(Post $post)
+    public function show(Post $post, Comment $comment)
     {
-        return view('posts.show')->with(['post' => $post]);
+        //return view('posts.show')->with(['post' => $post]);
+        $like=Like::where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
+        return view('posts.show', compact('post', 'like'));
     }
+    
 
     public function create()
     {
